@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Registration</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+
+	</script>
+
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #fff 100%), url("https://backgrounddownload.com/wp-content/uploads/2018/09/whats-app-background-4.jpg");
+			height: 100vh;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		form {
+			padding: 3%
+		}
+
+		h3 {
+			margin: 0;
+			background: rgba(0, 0, 0, 0.8);
+			color: white;
+			font-size: 40px;
+			text-transform: initial;
+			padding: 11px;
+		}
+
+		h4 {
+			margin-top: 85vh;
+			background: rgba(0, 0, 0, 0.8);
+			font-size: 40px;
+			color: white;
+			text-transform: initial;
+			padding: 11px;
+		}
+
+		input[type=text],
+		input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		button:hover {
+			opacity: 0.8;
+		}
+
+		.cancelbtn {
+			width: auto;
+			padding: 10px 18px;
+			background-color: #f44336;
+		}
+
+		.imgcontainer {
+			text-align: center;
+			margin: 24px 0 12px 0;
+		}
+
+		img.avatar {
+			width: 40%;
+			border-radius: 50%;
+		}
+
+		.container {
+			padding: 16px;
+			border: 2px;
+			border-color: #777;
+			border-width: 1px;
+			border-style: groove;
+			border-style: groove;
+			width: 25vw;
+			height: 40vh;
+			padding: 3%;
+			background: rgba(255, 255, 255, 0.8);
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			box-shadow: 0 2px 9px rgba(0, 0, 0, 0.6);
+
+		}
+
+		span.psw {
+			float: right;
+			padding-top: 16px;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h3>Chat Application</h3>
+	</header>
+
+	<div class="container">
+		<label for="name"><b>Name</b></label>
+                <input id="user-name" type="text" placeholder="Enter Name" name="name" required>
+            <label for="email"><b>Email-id</b></label>
+                <input id="email-id" type="text" placeholder="Enter Email-id" name="email_id" required>
+            <label for="psw"><b>Password</b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="password" required>
+                <button onclick="register()">Login</button>
+         <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+
+
+</body>
+</footer>
+<h4>
+    <div style="font-size:12px!important;margin-left:38vw">
+        <p>&copy; Copyright Agency and contributors 2019. Karan Meghani<p>
+    </div>
+</h4>
+
+</footer>
+</html>
+<script>
+function register(data) {
+    var user_name = document.getElementById('user-name').value
+    var password = document.getElementById('password').value
+    var email = document.getElementById('email-id').value
+    payload = {
+        'name' : user_name,
+        'email_id' : email,
+        'password' : window.btoa(password)
+    }
+    $.ajax("/register",{
+        method : "POST",
+        data : payload,
+        dataType: "text",
+        success: (data) => {
+            response = JSON.parse(data)
+            if(response.status ==200){
+                window.location.replace('/')
+                alert('User Successfully created')
+            }
+            else{
+                window.location.replace('/')
+                alert('User already Exist')
+            }
+        }
+    });
+}
+</script>
