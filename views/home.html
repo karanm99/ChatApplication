@@ -277,6 +277,7 @@ function sendMessage(){
         'chat_with' : document.chat_with,
         'message' :  window.btoa(message)
     }
+    var type = document.getElementsByClassName("send-button")[0].id
     $.ajax("/personal/chat",{
         method : "POST",
         data : payload,
@@ -284,7 +285,7 @@ function sendMessage(){
         success: (data) => {
             response = JSON.parse(data)
             if(response.status ==200){
-                showChat(document.chat_with,"personal_chat")
+                showChat(document.chat_with,type);
             }
         }
     });
@@ -303,7 +304,7 @@ function showChat(name,type){
         payload = {
         'name' : name
         }
-        
+    document.getElementsByClassName("send-button")[0].id ="personal_chat";
     $.ajax("/personal/chat",{
         method : "GET",
         data : payload,
@@ -362,6 +363,7 @@ function showChat(name,type){
          payload = {
              'name' : name
         }
+	document.getElementsByClassName("send-button")[0].id ="group_chat";
         $.ajax("/group/chat",{
         method : "GET",
         data : payload,
